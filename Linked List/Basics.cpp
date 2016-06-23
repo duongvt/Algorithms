@@ -148,6 +148,45 @@ void print_in_reverse_order(struct node* head)
 	printf("%d ",head->data);
 }
 
+struct node* removedup(struct node* head)
+{
+	if(head==NULL) return NULL;
+
+	struct node *temp=head,*ne;
+
+	while(temp->next!=NULL)
+	{
+		ne=temp->next;
+		if(temp->data==ne->data)
+		{
+			temp->next=ne->next;
+			delete ne;
+			if(temp==NULL) break;
+		}
+		else
+		{
+			temp=temp->next;
+		}
+	}
+	return head;
+}
+
+
+struct node* swap_nodes(struct node* head)
+{
+	if(head==NULL) return NULL;
+	struct node *curr=head,*ne;
+
+	while(curr->next->next!=NULL)
+	{
+		ne=curr->next;
+		curr->next=ne->next;
+		ne->next=curr;
+		curr=curr->next->next;
+	}
+	return head;
+}
+
 int main()
 {
 	struct node* head=NULL;
@@ -164,7 +203,9 @@ int main()
 		printf("Press 7 to print the elements of linked list\n");
 		printf("Press 8 to find nth node from the end of linked list\n");
 		printf("Press 9 to print linked list in reverse order\n");
-		printf("Press 10 to exit\n");
+		printf("Press 10 to remove duplicates from sorted list\n");
+		printf("Press 11 to swap every node\n");
+		printf("Press 12 to exit\n");
 		
 	    scanf("%d",&n);
 	    switch(n)
@@ -229,8 +270,14 @@ int main()
 					print_in_reverse_order(head);
 					printf("\n");
 	    			break;
+
+	    	case 10: head=removedup(head);
+	    			 break; 
+
+	    	case 11: head=swap_nodes(head);
+	    			 break;
 	    						
-	    	case 10: exit(1);
+	    	case 12: exit(1);
 	    			break;
 	    	
 	    	default:printf("Please enter a valid input");

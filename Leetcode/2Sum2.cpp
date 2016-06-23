@@ -35,6 +35,7 @@ int main()
 
 		if(result.size()<2) cout<<"-1"<<endl;
 		else cout<<result[0]<<" "<<result[1]<<endl;
+		 result.clear();
 	}
 return 0;
 }
